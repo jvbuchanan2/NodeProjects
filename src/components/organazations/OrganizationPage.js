@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as OrganizationActions from '../../redux/actions/organizationActions';
+import * as organizationActions from '../../redux/actions/organizationActions';
 import PropTypes from 'prop-types';
+import { bindActionCreators} from 'redux';
 
 class OrganizationPage extends React.Component {
  state = {
@@ -18,7 +19,7 @@ class OrganizationPage extends React.Component {
 
 handleSubmit = (event) => {
   event.preventDefault();
-  this.props.dispatch(OrganizationActions.createOrganization(this.state.organization))
+  this.props.actions.createOrganization(this.state.organization);
 };
 
   render() {
@@ -38,7 +39,7 @@ handleSubmit = (event) => {
 
 OrganizationPage.propTypes = {
   organizations: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -47,8 +48,11 @@ function mapStateToProps(state) {
   }
 }
 
-// function mapDispatchToProps() {
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(organizationActions, dispatch)
+  };
+}
 
 
-export default connect(mapStateToProps)(OrganizationPage);
+export default connect(mapStateToProps,mapDispatchToProps)(OrganizationPage);
