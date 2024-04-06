@@ -7,7 +7,7 @@ import AboutPage from "./components/about/AboutPage";
 import Header from "./components/common/Header";
 import PageNotFound from "./components/PageNotFound";
 import OrganizationPage from "./components/organazations/OrganizationPage";
-
+import EmployeePage from "./components/employees/EmployeePage";
 
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
       <Route exact path="/" component={HomePage} />
       <Route path="/about" component={AboutPage} />
       <Route path="/orgs" component={OrganizationPage} />
+      <Route path="/employee" component={EmployeePage} />
       <Route component={PageNotFound} />
     </Switch>
   </div>

@@ -7,12 +7,17 @@ import { bindActionCreators} from 'redux';
 class OrganizationPage extends React.Component {
  state = {
       organization: {
+        name: "",
         title: ""
       }
     };
   
+    handleNameChange = event => {
+      const organization = {...this.state.organization, name: event.target.value};
+      this.setState({organization});
+    }
 
-  handleChange = event => {
+  handleTitleChange = event => {
     const organization = {...this.state.organization, title: event.target.value};
     this.setState({organization});
   }
@@ -27,10 +32,11 @@ handleSubmit = (event) => {
       <form onSubmit={this.handleSubmit}>
         <h2>Organizations</h2>
         <h3>Add Organization</h3>
-        <input type="text" onChange={this.handleChange} value={this.state.organization.title} />
+        <input type="text" onChange={this.handleNameChange} value={this.state.organization.name} />
+        <input type="text" onChange={this.handleTitleChange} value={this.state.organization.title} />
         <input type="submit" value="Save" />
         { this.props.organizations.map(org => (
-          <div key={org.title}>{org.title}</div>
+          <div key={org.title}>{org.name + ' -- ' + org.title}</div>
         ))}
       </form>
     );
